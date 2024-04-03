@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-FIFO Caching
+LIFO Caching
 """
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """
-    Implements Caching using the FIFO
+    Implements Caching using the LIFO
     replacement algorithm
     """
     def __init__(self):
@@ -20,15 +20,15 @@ class FIFOCache(BaseCaching):
         """
         Adds items to the cache
         If the cache is full then it discards
-        the first item that was added
+        the last item that was added
         """
         if key and item:
             cache_items_count = len([key for key in self.cache_data.keys()])
 
-            if cache_items_count == BaseCaching.MAX_ITEMS:
-                first_key = next(iter(self.cache_data))  # Get the first key
-                self.cache_data.pop(first_key)
-                print(f"DISCARD: {first_key}")
+            if cache_items_count >= BaseCaching.MAX_ITEMS:
+                # Removes the last added key
+                last_added = self.cache_data.popitem()
+                print(f"DISCARD: {last_added[0]}")
             self.cache_data[key] = item
 
     def get(self, key):
