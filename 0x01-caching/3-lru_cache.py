@@ -41,6 +41,7 @@ class LRUCache(BaseCaching):
         try:
             cache_item = self.cache_data[key]
             # Move the item to the end of the dict
+            self.cache_data.pop(key)  # Remove the accessed key
             self.cache_data[key] = cache_item
             return cache_item
         except KeyError:
