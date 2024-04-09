@@ -132,8 +132,13 @@ def index():
     current_time = datetime.now(
             pytz.timezone(get_timezone()))
     # Format the current time
-    formatted_time = current_time.strftime('%b %d, %Y, %I:%M:%s %P')
-    return render_template('index.html', user=g.user, current_time=formatted_time)
+    formatted_time = current_time.strftime(
+            '%b %d, %Y, %I:%M:%s %P')
+    return render_template(
+                            'index.html',
+                            user=g.user,
+                            current_time=formatted_time
+                        )
 
 
 if __name__ == '__main__':
